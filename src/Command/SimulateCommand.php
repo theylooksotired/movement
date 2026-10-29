@@ -51,7 +51,7 @@ class SimulateCommand extends Command
 
         // Run the simulation using the Simulate service
         $result = Simulate::run($cleanCommands);
-        $output->writeln(implode(",", $result));
+        $output->write(implode(",", $result));
 
         return Command::SUCCESS;
     }

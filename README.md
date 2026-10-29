@@ -1,7 +1,10 @@
 # Movement
 
 This is a simple movement simulation of a token in a board.
-It will be coded on PHP using the *Symfony* framework, because it's the one I'm most used, but the logic is very easy to translate to any other language or framework.
+
+It is be coded on PHP using the *Symfony* framework, because it's the one I'm most used, but the logic is very easy to translate to any other language or framework.
+
+To test it: https://movement.leanomartinet.com/
 
 # Running the simulation
 
@@ -76,83 +79,29 @@ There are four implementations of each movement:
 
 The board remains untouched in all of these movements.
 
+# Testing
 
-# First proof of concept
+I have implement php/unit which is the default testing solution in Symfony and run the necessary tests for the application, meaning tests of:
 
-The idea of this POC is to understand the algorithm and to see it running. So let's strip down everything (architecture, classes, objects) and focus on a simple input/output.
+- The original one of the exercise
+- Just sending the headers with any movements (should return the position of the token if valid)
+- Sending invalid commands, like letters
+- Valid movements (forward, backward, rotation)
 
-We already decided that the borad is a matrix where every point is valid. A token has a position (x,y) and a direction.
+In PHP we can use xDebug for code coverage but I didn't really understood what was meant by the "explain any coverage gaps" phrase.
 
-Then we strip down the input to create the board and the token, and finally we run the commands according to what we established in the personal notes.
+# HTML Platform
 
-For the moment the proof of concept seems to work because it does what was written on paper.
+There's a very simple HTML page to test the simulation, it has a textarea that gets the commands and executes them line by line.
 
-```
-php bin/console simulate 4,4,2,2,1,4,1,3,2,3,2,4,1,0
-^ "--1--"
-^ array:3 [
-  "col" => 2
-  "row" => 1
-  "direction" => "N"
-]
-^ "--4--"
-^ array:3 [
-  "col" => 2
-  "row" => 1
-  "direction" => "W"
-]
-^ "--1--"
-^ array:3 [
-  "col" => 1
-  "row" => 1
-  "direction" => "W"
-]
-^ "--3--"
-^ array:3 [
-  "col" => 1
-  "row" => 1
-  "direction" => "N"
-]
-^ "--2--"
-^ array:3 [
-  "col" => 1
-  "row" => 2
-  "direction" => "N"
-]
-^ "--3--"
-^ array:3 [
-  "col" => 1
-  "row" => 2
-  "direction" => "E"
-]
-^ "--2--"
-^ array:3 [
-  "col" => 0
-  "row" => 2
-  "direction" => "E"
-]
-^ "--4--"
-^ array:3 [
-  "col" => 0
-  "row" => 2
-  "direction" => "N"
-]
-^ "--1--"
-^ array:3 [
-  "col" => 0
-  "row" => 1
-  "direction" => "N"
-]
-^ "--0--"
-1^ "--END--"
-2^ array:3 [
-  "col" => 0
-  "row" => 1
-  "direction" => "N"
-]
-```
+![Online simulation](https://test.leanomartinet.com/ressources/movement_html.png)
 
-## Personal notes
+
+---
+---
+---
+
+# Personal notes
 
 This notes explain how it works, but let's wait for the next commits to get something better.
 

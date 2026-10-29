@@ -24,9 +24,9 @@ class Simulate
         // Set the default result as the error one
         $errorResult = [-1, -1];
         
-        // Check that we have at least 1 command to execute
-        // The first four are the headers
-        if (count($commands) <= 4) {
+        // Check that we have at least the header
+        // to create a board and a token
+        if (count($commands) < 4) {
             return $errorResult;
         }
 
@@ -39,11 +39,18 @@ class Simulate
         $token = new Token();
         $token->setCol($commands[2]);
         $token->setRow($commands[3]);
-
+        
         // Run the rest of the simulation
         // We expect that the commands are the ones defined (0, 1, 2, 3, 4)
         // Whatever other command, the simulation will just ignore it.
         $commands = array_slice($commands, 4);
+
+        // If we have no commands we just return the position of the token
+        // if it's valid on the board.
+        if (count($commands) == 0) {
+            return $board->isPositionValid($token->getRow(), $token->getCol()) ? [$token->getCol(), $token->getRow()] : $errorResult;
+        }
+
         foreach ($commands as $command) {
             switch ($command) {
                 case 0:
